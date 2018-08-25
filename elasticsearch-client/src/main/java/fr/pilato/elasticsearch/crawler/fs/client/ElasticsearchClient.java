@@ -30,6 +30,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.Version;
 import org.elasticsearch.client.Request;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.ResponseException;
 import org.elasticsearch.client.RestClient;
@@ -269,7 +270,7 @@ public class ElasticsearchClient extends RestHighLevelClient {
 
     public void setElasticsearchBehavior() throws IOException {
         if (VERSION == null) {
-            VERSION = info().getVersion();
+            VERSION = info(RequestOptions.DEFAULT).getVersion();
 
             // With elasticsearch 5.0.0, we have ingest node
             if (VERSION.onOrAfter(Version.V_5_0_0_alpha1)) {
