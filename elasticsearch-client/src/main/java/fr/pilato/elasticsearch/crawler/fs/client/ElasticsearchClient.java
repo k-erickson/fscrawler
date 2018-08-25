@@ -122,26 +122,6 @@ public class ElasticsearchClient extends RestHighLevelClient {
     }
 
     /**
-     * Delete an index (removes all data)
-     * @param index index name
-     * @throws IOException In case of error
-     */
-    public void deleteIndex(String index) throws IOException {
-        logger.debug("delete index [{}]", index);
-
-        try {
-            Response response = getLowLevelClient().performRequest(new Request("DELETE", "/" + index));
-            logger.trace("delete index response: {}", LowLevelClientJsonUtil.asMap(response));
-        } catch (ResponseException e) {
-            if (e.getResponse().getStatusLine().getStatusCode() == 404) {
-                logger.debug("index [{}] does not exist", index);
-                return;
-            }
-            throw e;
-        }
-    }
-
-    /**
      * Check if an index exists
      * @param index index name
      * @return true if the index exists, false otherwise
