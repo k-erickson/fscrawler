@@ -76,9 +76,8 @@ public class FsCrawlerImplAllDocumentsIT extends AbstractITCase {
             throw new RuntimeException(testResourceTarget + " doesn't seem to exist. Check your JUnit tests.");
         }
 
-        staticLogger.info(" -> Removing existing index [fscrawler_test_all_documents]");
-        elasticsearchClient.indices().delete(new DeleteIndexRequest("fscrawler_test_all_documents"), RequestOptions.DEFAULT);
-        elasticsearchClient.indices().delete(new DeleteIndexRequest("fscrawler_test_all_documents_folder"), RequestOptions.DEFAULT);
+        staticLogger.info(" -> Removing existing index [fscrawler_test_all_documents*]");
+        elasticsearchClient.indices().delete(new DeleteIndexRequest("fscrawler_test_all_documents*"), RequestOptions.DEFAULT);
 
         staticLogger.info("  --> starting crawler in [{}] which contains [{}] files", testResourceTarget, numFiles);
 
